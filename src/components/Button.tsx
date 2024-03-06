@@ -2,7 +2,7 @@ import React from 'react';
 
 interface ButtonProps {
 text:string,
-onClick:()=>void;
+onClick:(arg?:string)=>void;
 }
 
 const Button:React.FC<ButtonProps> = ({text,onClick})=>{

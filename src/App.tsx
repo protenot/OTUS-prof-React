@@ -1,20 +1,18 @@
 import { useState } from 'react';
-//import reactLogo from './assets/react.svg';
-//import viteLogo from '/vite.svg';
-import CodeEditorWindow from './components/CodeEditor';
+import Task from './components/Task';
 import './App.css'
 
 
 function App() {
   const [count, setCount] = useState(0)
-  const handleChange = (type: string, value: string) => {
+   const handleChange = (type: string, value: string) => {
     console.log(`Change detected: ${type} - ${value}`);
-  };
+  }; 
   return (
     <>
       
       <h1>Vite + React</h1>
-      <CodeEditorWindow
+      <Task
         language="javascript"
         theme="vs-dark"
         code="// Your code here..."

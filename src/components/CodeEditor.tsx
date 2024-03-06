@@ -24,7 +24,7 @@ const CodeEditorWindow: React.FC<CodeEditorWindowProps> = ({
   };
 
   return (
-    <div className="overlay rounded-md overflow-hidden w-full h-full shadow-4xl">
+    <div className="editor-container">
       <Editor
         height="85vh"
         width={`100%`}

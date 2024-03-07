@@ -3,13 +3,14 @@ import Button from './Button'
 import CodeEditorWindow from './CodeEditor';
 import TaskEditor from "./TaskEditor";
 import {TASKS} from '../fakeDB/tasks';
-function Task () {0
+function Task () {
+    const [tasks, setTasks] = useState(TASKS);
     const [theme, setTheme]=useState('vs-dark');
     const [solution, setSolution] = useState('');
     const [information,setInformation] = useState('')
     const [description,setDescription] = useState('')
     const [complexity, setComplexity] = useState(0)
-    const [language,setLanguage]=useState('JavaScript')
+    const [language,setLanguage]=useState('')
     const [tag,setTag]=useState('')
     const [isEditorOpen, setIsEditorOpen] = useState(false)
     const [editedTask, setEditedTask]=useState(null)
@@ -19,23 +20,33 @@ function Task () {0
     }
     const closeEditor = ()=>{
         setIsEditorOpen(false)
+      
     }
 
     const saveTaskChanges = (description, solution, language,tag,complexity)=>{
      if(editedTask){
-        console.log(description, solution, language,tag,complexity)
-    
-     }   
+       /*  console.log(description, solution, language,tag,complexity)
+        
+        console.log(editedTask.id, description)
+        handleInputChange(editedTask.id, 'description', description);
+        setDescription(description);
+        handleInputChange(editedTask.id, 'solution', solution);
+        setSolution(solution);
+        handleInputChange(editedTask.id, 'complexity', complexity);
+        setComplexity(complexity) */
+        const updatedTask = { ...editedTask, description, solution, language, tag, complexity };
+        setEditedTask(updatedTask);
+    }   
     }
     
-   /*  useEffect(()=>{
+    useEffect(()=>{
         setDescription(description)
         setComplexity(complexity)
         setLanguage(language)
         setTag(tag)
     },[description, complexity, language,tag]
 
-    ) */
+    )
 
     useEffect(()=>{
         const task12345 = TASKS.find(task => task.id === '12345');
@@ -54,6 +65,19 @@ function Task () {0
     }  
     
     };
+
+    const handleInputChange = (taskId,field,value)=>{
+        const taskIndex = tasks.findIndex(
+            task => task.id===taskId
+        )
+        if(taskIndex !==-1){
+            const updatedTask = {...tasks[taskIndex], [field]:value}
+            const updatedTasks = [...tasks.slice(0, taskIndex), updatedTask, ...tasks.slice(taskIndex + 1)]
+            setTasks(updatedTasks)
+        }
+
+
+    }
       const handleClickBack = ()=>{
         console.log("Здесь будет логика возвращения на страницу выбора задач")
       }
@@ -79,19 +103,24 @@ function Task () {0
   return(<div>
    {isEditorOpen ? (
                 <TaskEditor
+                    task = {editedTask}
+                    onInputChange = {handleInputChange}
                     initialDescription={editedTask ? editedTask.description : ''}
                     initialSolution={editedTask ? editedTask.solution : ''}
                     initialTag={editedTask ? editedTask.tag : ''}
+                    initialLanguage = {editedTask ? editedTask.language:''}
                     initialComplexity={editedTask ? editedTask.complexity : ''}
                     onSave={saveTaskChanges}
+                    closeEditor={closeEditor}
                 />
             ) : (
                 <>
                     <p>Description: {editedTask ? editedTask.description : ''}</p>
                     <p>Complexity: {editedTask ? editedTask.complexity : ''}</p>
                     <p>Language: {editedTask ? editedTask.language : ''}</p>
+                    <p>Tag: {editedTask ? editedTask.tag : ''}</p>
                     <Button text="Редактировать задачу" onClick={() => openEditor()} />
-                    <Button text="Завершить редактирование задачи" onClick={() => closeEditor()} />
+                   
                 </>
             )}
     <Button text ="Вернуться к выбору задачи" onClick = {handleClickBack}/>

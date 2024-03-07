@@ -5,18 +5,15 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
-   const handleChange = (type: string, value: string) => {
+  /*  const handleChange = (type: string, value: string) => {
     console.log(`Change detected: ${type} - ${value}`);
-  }; 
+  }; */ 
   return (
     <>
       
       <h1>Vite + React</h1>
       <Task
-        language="javascript"
-        theme="vs-dark"
-        code="// Your code here..."
-        onChange={handleChange}
+        
       />
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>

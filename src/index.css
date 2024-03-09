@@ -53,10 +53,9 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
-.editor-div{
+.editor-div {
   display: flex;
   flex-direction: column;
-  
 }
 @media (prefers-color-scheme: light) {
   :root {

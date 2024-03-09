@@ -12,7 +12,7 @@ const CodeEditorWindow: React.FC<CodeEditorWindowProps> = ({
   onChange,
   language,
   code,
-  theme
+  theme,
 }) => {
   const [value, setValue] = useState(code || "");
 
@@ -38,4 +38,3 @@ const CodeEditorWindow: React.FC<CodeEditorWindowProps> = ({
 };
 
 export default CodeEditorWindow;
-

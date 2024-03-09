@@ -1,9 +1,9 @@
 export interface Task {
-    id: string
-    description: string
-    solution: string
-    complexity: number
-    language: string
-    tag: string
-    rating:number
-  }
+  id: string;
+  description: string;
+  solution: string;
+  complexity: number;
+  language: string;
+  tag: string;
+  rating: number;
+}

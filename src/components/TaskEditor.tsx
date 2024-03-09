@@ -11,7 +11,7 @@ function TaskEditor({task, onInputChange, initialDescription, initialLanguage, i
 
     const handleSave = ()=>{
         console.log(description,solution,complexity, language, tag)
-        onSave(description,solution,complexity, language, tag)
+        onSave(description,solution, language, tag, complexity)
        closeEditor()
     }
   
@@ -26,7 +26,7 @@ return(
                 value = {description} 
                 onChange ={(e)=>{
                     setDescription(e.target.value);
-                    // onInputChange(task.id, 'description', e.target.value)
+                     onInputChange(task.id, 'description', e.target.value)
                      }} />
         </label>
         

@@ -25,37 +25,25 @@ function Task () {
 
     const saveTaskChanges = (description, solution, language,tag,complexity)=>{
      if(editedTask){
-       /*  console.log(description, solution, language,tag,complexity)
-        
-        console.log(editedTask.id, description)
-        handleInputChange(editedTask.id, 'description', description);
-        setDescription(description);
-        handleInputChange(editedTask.id, 'solution', solution);
-        setSolution(solution);
-        handleInputChange(editedTask.id, 'complexity', complexity);
-        setComplexity(complexity) */
+      
         const updatedTask = { ...editedTask, description, solution, language, tag, complexity };
         setEditedTask(updatedTask);
+        console.log('---', editedTask)
+        console.log('+++', updatedTask)
     }   
     }
     
-    useEffect(()=>{
-        setDescription(description)
-        setComplexity(complexity)
-        setLanguage(language)
-        setTag(tag)
-    },[description, complexity, language,tag]
-
-    )
-
+   
     useEffect(()=>{
         const task12345 = TASKS.find(task => task.id === '12345');
         if (task12345){
             setDescription(task12345.description);
+            setSolution(task12345.solution);
             setComplexity(task12345.complexity);
             setLanguage(task12345.language);
             setTag(task12345.tag);
             setEditedTask(task12345);
+           
         }
     },[]);
     const handleChange = (type: string, value: string) => {
@@ -72,7 +60,9 @@ function Task () {
         )
         if(taskIndex !==-1){
             const updatedTask = {...tasks[taskIndex], [field]:value}
+            console.log("updatedTask",updatedTask)
             const updatedTasks = [...tasks.slice(0, taskIndex), updatedTask, ...tasks.slice(taskIndex + 1)]
+            console.log("updatedTasks", updatedTasks)
             setTasks(updatedTasks)
         }
 
@@ -105,11 +95,11 @@ function Task () {
                 <TaskEditor
                     task = {editedTask}
                     onInputChange = {handleInputChange}
-                    initialDescription={editedTask ? editedTask.description : ''}
-                    initialSolution={editedTask ? editedTask.solution : ''}
-                    initialTag={editedTask ? editedTask.tag : ''}
-                    initialLanguage = {editedTask ? editedTask.language:''}
-                    initialComplexity={editedTask ? editedTask.complexity : ''}
+                    initialDescription={editedTask ? description : ''}
+                    initialSolution={editedTask ? solution : ''}
+                    initialTag={editedTask ? tag : ''}
+                    initialLanguage = {editedTask ? language:''}
+                    initialComplexity={editedTask ?complexity : ''}
                     onSave={saveTaskChanges}
                     closeEditor={closeEditor}
                 />

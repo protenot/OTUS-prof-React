@@ -6,13 +6,15 @@ export const USERS: User[] = [
     name: 'Olga',
     surname: 'Belaya',
     email: 'protenot@gmail.com',
-    role: 'User'
+    role: 'User',
+    rating:25
   },
   {
     id: '2',
     name: 'Nestor',
     surname: 'Petrovich',
     email: 'nestor@gmail.com',
-    role: 'Interviewer'
+    role: 'Interviewer',
+    rating:25
   }
 ]

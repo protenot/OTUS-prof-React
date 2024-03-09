@@ -5,4 +5,5 @@ export interface Task {
     complexity: number
     language: string
     tag: string
+    rating:number
   }

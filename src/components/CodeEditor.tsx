@@ -26,7 +26,7 @@ const CodeEditorWindow: React.FC<CodeEditorWindowProps> = ({
   return (
     <div className="editor-container">
       <Editor
-        height="85vh"
+        height="400px"
         width={`100%`}
         language={language || "javascript"}
         value={value}

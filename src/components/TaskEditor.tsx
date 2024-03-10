@@ -34,7 +34,7 @@ function TaskEditor({
           value={description}
           onChange={(e) => {
             setDescription(e.target.value);
-            //  onInputChange(task.id, 'description', e.target.value)
+           
           }}
         />
       </label>
@@ -49,7 +49,7 @@ function TaskEditor({
           value={complexity}
           onChange={(e) => {
             setComplexity(e.target.value);
-            //  onInputChange(task.id, 'complexity', e.target.value)
+            
           }}
         />
       </label>
@@ -83,7 +83,7 @@ function TaskEditor({
           value={solution}
           onChange={(e) => {
             setSolution(e.target.value);
-            //  onInputChange(task.id, 'solution', e.target.value)
+           
           }}
         />
       </label>

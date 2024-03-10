@@ -57,27 +57,13 @@ function Task() {
     }
   }, []);
   const handleChange = (type: string, value: string) => {
-   
-    console.log(`Change detected: ${type} - ${value}`);
+  
     if (type === "code") {
       setSolution(value);
     }
   };
 
-  /* const handleInputChange = (taskId, field, value) => {
-    const taskIndex = tasks.findIndex((task) => task.id === taskId);
-    if (taskIndex !== -1) {
-      const updatedTask = { ...tasks[taskIndex], [field]: value };
-      console.log("updatedTask", updatedTask);
-      const updatedTasks = [
-        ...tasks.slice(0, taskIndex),
-        updatedTask,
-        ...tasks.slice(taskIndex + 1),
-      ];
-      console.log("updatedTasks", updatedTasks);
-      setTasks(updatedTasks);
-    }
-  }; */
+  
   const handleClickBack = () => {
     console.log("Здесь будет логика возвращения на страницу выбора задач");
   };
@@ -89,6 +75,8 @@ function Task() {
 
   const handleClickCompare = (taskId: string) => {
     const task = TASKS.find((task) => task.id === taskId);
+    
+
     if (task) {
       const standartSolution = task.solution;
       console.log('standartSolution',standartSolution)

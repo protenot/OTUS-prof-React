@@ -28,7 +28,7 @@ function UserEditor({
           onChange={(e) => {
             setRating(e.target.value);
             console.log(e.target.value)
-          //  onInputChange(user.id, "rating", e.target.value);
+         
           }}
         />
       </label>

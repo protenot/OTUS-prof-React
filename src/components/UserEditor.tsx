@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Button from "./Button";
 
+interface UserEditorProps{
+  initialRating:number;
+  onSave:(rating:number)=>void;
+  closeEditor: () => void;
+}
+
+
 function UserEditor({
-  user,
-  onInputChange,
   initialRating,
   onSave,
   closeEditor,
-}) {
+}:UserEditorProps) {
   const [rating, setRating] = useState(initialRating);
 
   const handleRatingSave = () => {
@@ -26,7 +31,7 @@ function UserEditor({
           type="text"
           value={rating}
           onChange={(e) => {
-            setRating(e.target.value);
+            setRating(+e.target.value);
             console.log(e.target.value)
          
           }}

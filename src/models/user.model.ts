@@ -3,6 +3,7 @@ export interface User {
   name: string;
   surname?: string;
   email: string;
-  role?: "Admin" | "User" | "Interviewer";
+  role: "Admin" | "User" | "Interviewer";
   password?: string;
+  rating: number;
 }

@@ -1,5 +1,15 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import Button from "./Button";
+
+interface TaskEditorProps {
+  initialDescription: string;
+  initialLanguage: string;
+  initialSolution: string;
+  initialTag: string;
+  initialComplexity: number;
+  onSave: (description: string, solution: string, language: string, tag: string, complexity: number) => void;
+  closeEditor: () => void;
+}
 
 function TaskEditor({
   initialDescription,
@@ -9,7 +19,7 @@ function TaskEditor({
   initialComplexity,
   onSave,
   closeEditor,
-}) {
+}: TaskEditorProps) {
   const [solution, setSolution] = useState(initialSolution);
   const [description, setDescription] = useState(initialDescription);
   const [complexity, setComplexity] = useState(initialComplexity);
@@ -48,7 +58,7 @@ function TaskEditor({
           type="text"
           value={complexity}
           onChange={(e) => {
-            setComplexity(e.target.value);
+            setComplexity(+e.target.value);
             
           }}
         />
@@ -79,7 +89,7 @@ function TaskEditor({
         <textarea
           id="solution-corr"
           className="solution-corr"
-          type="text"
+         
           value={solution}
           onChange={(e) => {
             setSolution(e.target.value);

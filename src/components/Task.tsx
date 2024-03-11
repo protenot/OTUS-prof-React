@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Button from "./Button";
 import CodeEditorWindow from "./CodeEditor";
 import TaskEditor from "./TaskEditor";
 import { TASKS } from "../fakeDB/tasks";
-function Task() {
-  const [tasks, setTasks] = useState(TASKS);
+import { Task} from "../models/task.model"; 
+
+function TaskItem() {
+ // const [tasks, setTasks] = useState(TASKS);
   const [theme, setTheme] = useState("vs-dark");
   const [solution, setSolution] = useState("");
   const [information, setInformation] = useState("");
@@ -13,11 +15,12 @@ function Task() {
   const [language, setLanguage] = useState("");
   const [tag, setTag] = useState("");
   const [isEditorOpen, setIsEditorOpen] = useState(false);
-  const [editedTask, setEditedTask] = useState(null);
+  const [editedTask, setEditedTask] = useState<Task | null>(null);
  
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+ // const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   const openEditor = () => {
+    console.log(description, complexity,tag);
     setIsEditorOpen(true);
   };
   const closeEditor = () => {
@@ -25,11 +28,11 @@ function Task() {
   };
 
   const saveTaskChanges = (
-    description,
-    solution,
-    language,
-    tag,
-    complexity,
+    description:string,
+    solution:string,
+    language:string,
+    tag:string,
+    complexity:number,
   ) => {
     if (editedTask) {
       const updatedTask = {
@@ -98,7 +101,7 @@ function Task() {
           initialSolution={editedTask ? editedTask.solution : ""}
           initialTag={editedTask ? editedTask.tag : ""}
           initialLanguage={editedTask ? editedTask.language : ""}
-          initialComplexity={editedTask ? editedTask.complexity : ""}
+          initialComplexity={editedTask ? editedTask.complexity : 0}
           onSave={saveTaskChanges}
           closeEditor={closeEditor}
         />
@@ -128,4 +131,4 @@ function Task() {
     </div>
   );
 }
-export default Task;
+export default TaskItem;

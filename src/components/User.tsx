@@ -1,26 +1,28 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import Button from "./Button";
 import { USERS } from "../fakeDB/users";
 import UserEditor from "./UserEditor";
+import { User } from "../models/user.model";
 
-function User() {
-const [users, setUsers] = useState(USERS);
+function UserItem() {
+//const [users, setUsers] = useState(USERS);
 const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState<string|''>("");
   const [rating, setRating] = useState(0);
   const [isEditorOpen, setIsEditorOpen] = useState(false);
-  const [editedUser, setEditedUser] = useState(null);
+  const [editedUser, setEditedUser] = useState<User|null>(null);
   
 
   const openEditor = () => {
+    console.log(rating)
     setIsEditorOpen(true);
   };
   const closeEditor = () => {
     setIsEditorOpen(false);
    
   };
-  const saveUserChanges = (rating) => {
+  const saveUserChanges = (rating:number) => {
     if (editedUser) {
       const updatedUser = { ...editedUser, rating };
       setEditedUser(updatedUser);
@@ -40,18 +42,7 @@ const [name, setName] = useState("");
   }, []);
   
 
-  const handleInputRatingChange = (userId, field, value) => {
-    const userIndex = users.findIndex((user) => user.id === userId);
-    if (userIndex !== -1) {
-      const updatedUser = { ...users[userIndex], [field]: value };
-      const updatedUsers = [
-        ...users.slice(0, userIndex),
-        updatedUser,
-        ...users.slice(userIndex + 1),
-      ];
-      setUsers(updatedUsers);
-    }
-  };
+ 
   const handleClickBack = () => {
     console.log(
       "Здесь будет логика возвращения на страницу выбора пользователя",
@@ -75,9 +66,8 @@ console.log("User is rendering...");
       <p>Роль : {editedUser ? role : ""}</p>
       {isEditorOpen ? (
         <UserEditor
-          user={editedUser}
-          onInputChange={handleInputRatingChange}
-          initialRating={editedUser ? editedUser.rating : ""}
+       
+          initialRating={editedUser ? editedUser.rating : 0}
           onSave={saveUserChanges}
             
           closeEditor={closeEditor}
@@ -95,4 +85,4 @@ console.log("User is rendering...");
     </div>
   );
 }
-export default User;
+export default UserItem;

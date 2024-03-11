@@ -1,16 +1,16 @@
 import React from "react";
-import Task from "./components/Task";
-import User from "./components/User";
+import TaskItem from "./components/Task";
+import UserItem from "./components/User";
 import "./App.css";
 
 function App() {
   return (
     <>
       <h2>Kомпонент задачи</h2>
-      <Task />
+      <TaskItem />
       <h2>Компонент пользователя</h2>
 
-      <User />
+      <UserItem />
     </>
   );
 }

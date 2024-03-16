@@ -10,7 +10,7 @@ function TaskList (){
     const navigate = useNavigate();
 
     const handleChoseButton = (taskId:string)=>{
-        navigate(`/task/${taskId}`)
+        navigate(`/tasks/${taskId}`)
     }
     const handleDeleteButton = (taskId: string) => {
         setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));

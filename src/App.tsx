@@ -5,7 +5,8 @@ import TaskList from "./components/TaskList";
 import UserItem from "./components/User";
 import "./App.css";
 import User from "./components/User";
-import Task from './components/Task';
+//import Task from './components/Task';
+import TaskItem from './components/Task';
 
 function App() {
  
@@ -28,7 +29,7 @@ function App() {
       <Routes>
       <Route path="/" Component = {User} />
       <Route path="/tasks" Component = {TaskList} />
-      <Route path="/tasks/:id" Component = {Task} />
+      <Route path="/tasks/:id" Component = {TaskItem} />
       <Route path="/users" Component = {UserItem} />
       </Routes>
     </div>

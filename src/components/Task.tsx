@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom';
 import Button from "./Button";
 import CodeEditorWindow from "./CodeEditor";
 import TaskEditor from "./TaskEditor";
@@ -18,7 +19,8 @@ function TaskItem() {
   const [editedTask, setEditedTask] = useState<Task | null>(null);
  
  // const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-
+const {id} = useParams();
+console.log(id)
   const openEditor = () => {
     console.log(description, complexity,tag);
     setIsEditorOpen(true);
@@ -49,7 +51,7 @@ function TaskItem() {
   };
 
   useEffect(() => {
-    const task12345 = TASKS.find((task) => task.id === "12345");
+    const task12345 = TASKS.find((task) => task.id === id);
     if (task12345) {
       setDescription(task12345.description);
       setSolution(task12345.solution);

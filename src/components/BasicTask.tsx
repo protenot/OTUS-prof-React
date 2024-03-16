@@ -1,6 +1,16 @@
 //import { useState } from "react";
 
-function BasicTask (description:string, complexity:number,language:string,tag:string){
+interface BasicTaskProps{
+    description:string;
+    complexity:number;
+    language:string;
+    tag:string; 
+}
+
+function BasicTask (props: BasicTaskProps){
+    const { description, complexity, language, tag } = props;
+ 
+
     return(
         <>
             <p>Description: {description}</p>

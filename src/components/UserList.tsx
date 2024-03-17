@@ -20,9 +20,9 @@ const handleChoseButton = (userId: string) => {
 
   const handleEditingRating = (userId:string, newRating:number)=>{
     setUsers((prevUsers)=>prevUsers.map((user)=>
-    user.id === userId ? {...user, raiting:newRating}: user,
-   console.log ('newRating',newRating)
-   //console.log ('user',users)
+    user.id === userId ? {...user, rating:newRating}: user,
+   console.log ('newRating',newRating,'userId', userId,)
+   //console.log ()
     ))
     setEditingRatingUserId(null);
    setEditingRatingValue(0)
@@ -53,17 +53,19 @@ return(
                         type="text"
                         value={editingRatingValue}
                         onChange={(e) => {setEditingRatingValue(+e.target.value); console.log(e.target.value,e.target.value)}}
-                        onKeyDown={(e) => {
+                        /* onKeyDown={(e) => {
                         if (e.key === "Enter") {
                         handleEditingRating(user.id, editingRatingValue);
-                  }
-                }}
+                          
+                      }
+                }} */
 
               />
                <Button
                 text="Сохранить"
                 onClick={() => {
                   handleEditingRating(user.id, editingRatingValue);
+                  console.log('editingRatingValue',editingRatingValue)
                 }}
               />
 

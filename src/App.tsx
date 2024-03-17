@@ -1,6 +1,6 @@
 //import React from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-
+import Home from "./components/Home";
 import TaskList from "./components/TaskList";
 import UserItem from "./components/User";
 import "./App.css";
@@ -27,7 +27,7 @@ function App() {
         </nav>
         <hr />
         <Routes>
-          <Route path="/" element={<UserItem />} />
+          <Route path="/" element={<Home />} />
           <Route path="/tasks" element={<TaskList />} />
           <Route path="/tasks/:id" element={<TaskItem />} />
           <Route path="/users" element={<UsersList />} />

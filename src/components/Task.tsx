@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
-import{ useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from "react-router-dom";
 import Button from "./Button";
 import CodeEditorWindow from "./CodeEditor";
 import TaskEditor from "./TaskEditor";
 import { TASKS } from "../fakeDB/tasks";
-import { Task} from "../models/task.model"; 
-
+import { Task } from "../models/task.model";
+import BasicTask from "./BasicTask";
 
 function TaskItem() {
- // const [tasks, setTasks] = useState(TASKS);
   const [theme, setTheme] = useState("vs-dark");
   const [solution, setSolution] = useState("");
   const [information, setInformation] = useState("");
@@ -18,12 +17,12 @@ function TaskItem() {
   const [tag, setTag] = useState("");
   const [isEditorOpen, setIsEditorOpen] = useState(false);
   const [editedTask, setEditedTask] = useState<Task | null>(null);
- 
- // const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-const {id} = useParams();
-console.log(id)
+  const [isUserInput, setIsUserInput] = useState(false);
+
+  const { id } = useParams();
+  
   const openEditor = () => {
-    console.log(description, complexity,tag);
+    console.log(description, complexity, tag);
     setIsEditorOpen(true);
   };
   const closeEditor = () => {
@@ -31,11 +30,11 @@ console.log(id)
   };
 
   const saveTaskChanges = (
-    description:string,
-    solution:string,
-    language:string,
-    tag:string,
-    complexity:number,
+    description: string,
+    solution: string,
+    language: string,
+    tag: string,
+    complexity: number,
   ) => {
     if (editedTask) {
       const updatedTask = {
@@ -47,13 +46,13 @@ console.log(id)
         complexity,
       };
       setEditedTask(updatedTask);
-      
     }
   };
 
   useEffect(() => {
     const task12345 = TASKS.find((task) => task.id === id);
     if (task12345) {
+      
       setDescription(task12345.description);
       setSolution(task12345.solution);
       setComplexity(task12345.complexity);
@@ -62,17 +61,16 @@ console.log(id)
       setEditedTask(task12345);
     }
   }, []);
-  const handleChange = (type:string, value: string) => {
-  
-    if (type === "code" ) {
+  const handleChange = (type: string, value: string) => {
+    if (type === "code") {
       setSolution(value);
+      setIsUserInput(true);
     }
   };
 
   const navigate = useNavigate();
   const handleClickBack = () => {
-    
-    navigate('/tasks');
+    navigate("/tasks");
   };
 
   const handleClickTheme = () => {
@@ -82,26 +80,28 @@ console.log(id)
 
   const handleClickCompare = () => {
     const task = TASKS.find((task) => task.id === id);
-    
+    if (!isUserInput) {
+      setInformation("Введите ваше решение");
+      return;
+    }
 
     if (task) {
       const standartSolution = task.solution;
-      console.log('standartSolution',standartSolution)
-      console.log('solution', solution)
-      if (solution === standartSolution) {
+      const userInput = solution.trim();
+      console.log("standartSolution", standartSolution);
+      console.log("userInput", userInput);
+      if (userInput === standartSolution) {
         setInformation("Вы правильно решили задачу");
       } else {
         setInformation("Попробуйте еще раз");
       }
     }
   };
- 
+
   return (
-   
     <div>
       {isEditorOpen ? (
         <TaskEditor
-         
           initialDescription={editedTask ? editedTask.description : ""}
           initialSolution={editedTask ? editedTask.solution : ""}
           initialTag={editedTask ? editedTask.tag : ""}
@@ -112,10 +112,13 @@ console.log(id)
         />
       ) : (
         <>
-          <p>Description: {editedTask ? editedTask.description : ""}</p>
-          <p>Complexity: {editedTask ? editedTask.complexity : ""}</p>
-          <p>Language: {editedTask ? editedTask.language : ""}</p>
-          <p>Tag: {editedTask ? editedTask.tag : ""}</p>
+        <BasicTask
+        description={editedTask ? editedTask.description : ""}
+        complexity = {editedTask ? editedTask.complexity : 0}
+        language={editedTask ? editedTask.language : ""}
+        tag={editedTask ? editedTask.tag : ""}
+        
+        /> 
           <Button text="Редактировать задачу" onClick={() => openEditor()} />
         </>
       )}
@@ -125,7 +128,6 @@ console.log(id)
         theme={theme}
         code="// Your code here..."
         onChange={handleChange}
-       
       />
       <Button text="Выберете тему" onClick={handleClickTheme} />
       <Button
@@ -134,7 +136,6 @@ console.log(id)
       />
       <p>{information}</p>
     </div>
-    
   );
 }
 export default TaskItem;

@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import{ useParams, useNavigate } from 'react-router-dom';
 import Button from "./Button";
 import CodeEditorWindow from "./CodeEditor";
 import TaskEditor from "./TaskEditor";
 import { TASKS } from "../fakeDB/tasks";
 import { Task} from "../models/task.model"; 
+
 
 function TaskItem() {
  // const [tasks, setTasks] = useState(TASKS);
@@ -61,16 +62,17 @@ console.log(id)
       setEditedTask(task12345);
     }
   }, []);
-  const handleChange = (type: string, value: string) => {
+  const handleChange = (type:string, value: string) => {
   
-    if (type === "code") {
+    if (type === "code" ) {
       setSolution(value);
     }
   };
 
-  
+  const navigate = useNavigate();
   const handleClickBack = () => {
-    console.log("Здесь будет логика возвращения на страницу выбора задач");
+    
+    navigate('/tasks');
   };
 
   const handleClickTheme = () => {
@@ -78,8 +80,8 @@ console.log(id)
     setTheme(newTheme);
   };
 
-  const handleClickCompare = (taskId: string) => {
-    const task = TASKS.find((task) => task.id === taskId);
+  const handleClickCompare = () => {
+    const task = TASKS.find((task) => task.id === id);
     
 
     if (task) {
@@ -95,6 +97,7 @@ console.log(id)
   };
  
   return (
+   
     <div>
       {isEditorOpen ? (
         <TaskEditor
@@ -127,10 +130,11 @@ console.log(id)
       <Button text="Выберете тему" onClick={handleClickTheme} />
       <Button
         text="Отправить на проверку"
-        onClick={() => handleClickCompare("12345")}
+        onClick={() => handleClickCompare()}
       />
       <p>{information}</p>
     </div>
+    
   );
 }
 export default TaskItem;

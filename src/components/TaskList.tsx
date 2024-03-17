@@ -7,6 +7,9 @@ import { useNavigate } from 'react-router-dom';
 
 function TaskList (){
     const [tasks, setTasks] = useState<Task[]>(TASKS);
+    const [editingTagTaskId, setEditingTagTaskId]=useState<string|null>(null)
+    const [editingTagValue, setEditingTagValue]= useState<string>('');
+    
     const navigate = useNavigate();
 
     const handleChoseButton = (taskId:string)=>{
@@ -15,6 +18,13 @@ function TaskList (){
     const handleDeleteButton = (taskId: string) => {
         setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
       };
+
+    const handleEditingTag = (taskId:string, newTag:string)=>{
+        setTasks((prevTasks)=>prevTasks.map((task)=>
+        task.id===taskId ? {...task, tag: newTag}:task));
+        setEditingTagTaskId(null);
+        setEditingTagValue('')
+    }
 
 
     return(
@@ -36,7 +46,42 @@ function TaskList (){
                     text="Удалить задачу"
                     onClick={()=>handleDeleteButton(task.id)}
                     />
+                
+
+                { editingTagTaskId  === task.id ?(
+                    <div>
+                        <input 
+                        type="text"
+                        value={editingTagValue}
+                        onChange={(e)=>setEditingTagValue(e.target.value)} 
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                                handleEditingTag(task.id, editingTagValue);
+                            }
+                        }}
+                        //onFocus={(e) => e.stopPropagation()}
+                        />
+                    
+                    <Button
+                    text = "Сохранить"
+                    onClick={()=>{handleEditingTag(task.id, editingTagValue)}}
+                    />
+                    </div>
+                ):(
+                    <div
+                        >
+                    <button
+                    className="button"
+                    onClick={() => {
+                        setEditingTagTaskId(task.id)
+                        setEditingTagValue(task.tag)}}
+                >
+                    Редактировать тег
+                </button>
                 </div>
+                )
+            }
+            </div>
             )
 
             )}

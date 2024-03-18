@@ -1,35 +1,45 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+//import React from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
+import Home from "./components/Home";
+import TaskList from "./components/TaskList";
+import UserItem from "./components/User";
+import "./App.css";
+
+import TaskItem from "./components/Task";
+import UsersList from "./components/UserList";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <BrowserRouter>
+      <Provider store={store}>
+        <div>
+          <nav>
+            <ul className="navigation">
+              <li>
+                <Link to="/">Домашняя</Link>
+              </li>
+              <li>
+                <Link to="/tasks">Задачи</Link>
+              </li>
+              <li>
+                <Link to="/users">Пользователи</Link>
+              </li>
+            </ul>
+          </nav>
+          <hr />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/tasks" element={<TaskList />} />
+            <Route path="/tasks/:id" element={<TaskItem />} />
+            <Route path="/users" element={<UsersList />} />
+            <Route path="/users/:id" element={<UserItem />} />
+          </Routes>
+        </div>
+      </Provider>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

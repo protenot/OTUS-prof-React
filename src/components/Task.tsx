@@ -20,7 +20,7 @@ function TaskItem() {
   const [isUserInput, setIsUserInput] = useState(false);
 
   const { id } = useParams();
-  
+
   const openEditor = () => {
     console.log(description, complexity, tag);
     setIsEditorOpen(true);
@@ -52,7 +52,6 @@ function TaskItem() {
   useEffect(() => {
     const task12345 = TASKS.find((task) => task.id === id);
     if (task12345) {
-      
       setDescription(task12345.description);
       setSolution(task12345.solution);
       setComplexity(task12345.complexity);
@@ -112,13 +111,12 @@ function TaskItem() {
         />
       ) : (
         <>
-        <BasicTask
-        description={editedTask ? editedTask.description : ""}
-        complexity = {editedTask ? editedTask.complexity : 0}
-        language={editedTask ? editedTask.language : ""}
-        tag={editedTask ? editedTask.tag : ""}
-        
-        /> 
+          <BasicTask
+            description={editedTask ? editedTask.description : ""}
+            complexity={editedTask ? editedTask.complexity : 0}
+            language={editedTask ? editedTask.language : ""}
+            tag={editedTask ? editedTask.tag : ""}
+          />
           <Button text="Редактировать задачу" onClick={() => openEditor()} />
         </>
       )}

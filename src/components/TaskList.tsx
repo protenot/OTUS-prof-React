@@ -55,13 +55,6 @@ function TaskList() {
                 type="text"
                 value={editingTagValue}
                 onChange={(e) => setEditingTagValue(e.target.value)}
-                /* onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    handleEditingTag(task.id, editingTagValue);
-                    console.log('editingTagValue',editingTagValue)
-                  }
-                }} */
-
               />
 
               <Button
@@ -79,8 +72,6 @@ function TaskList() {
                   setEditingTagTaskId(task.id);
                   setEditingTagValue(task.tag);
                 }}
-              
-                
               />
             </div>
           )}

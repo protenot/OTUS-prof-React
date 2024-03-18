@@ -15,7 +15,7 @@ function UserEditor({ initialRating, onSave, closeEditor }: UserEditorProps) {
     onSave(rating);
     closeEditor();
   };
-  console.log("UserEditor is rendering...");
+ 
   return (
     <div className="rating-editor">
       <label htmlFor="rating-corr">

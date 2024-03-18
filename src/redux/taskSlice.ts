@@ -26,7 +26,7 @@ const tasksSlice = createSlice({
         Object.assign(existingTask, action.payload);
       }
     },
-    saveDescription(
+   /*  saveDescription(
       state,
       action: PayloadAction<{ taskId: string; description: string }>,
     ) {
@@ -35,9 +35,9 @@ const tasksSlice = createSlice({
       if (existingTask) {
         existingTask.description = description;
       }
-    },
+    }, */
 
-    saveSolution(
+    /* saveSolution(
       state,
       action: PayloadAction<{ taskId: string; solution: string }>,
     ) {
@@ -74,7 +74,7 @@ const tasksSlice = createSlice({
       if (existingTask) {
         existingTask.tag = tag;
       }
-    },
+    }, */
     updateTag(state, action: PayloadAction<{ taskId: string; tag: string }>) {
       const { taskId, tag } = action.payload;
       const tagToUpdate = state.tasks.find((task) => task.id === taskId);
@@ -87,11 +87,6 @@ const tasksSlice = createSlice({
 export const {
   removeTask,
   updateTask,
-  saveDescription,
-  saveSolution,
-  saveComplexity,
-  saveLanguage,
-  saveTag,
   updateTag,
 } = tasksSlice.actions;
 export default tasksSlice.reducer;

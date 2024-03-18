@@ -13,7 +13,6 @@ function TaskItem() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  // Fetch task from Redux store by id
   const editedTask = useSelector((state: RootState) =>
     selectTaskById(state, id as string),
   );

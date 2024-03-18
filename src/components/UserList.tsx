@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { removeUser, updateUserRating } from "../redux/userSlice"; // Импортируем действие для обновления рейтинга
 import Button from "./Button";
 import { RootState } from "../redux/store";
-//import { USERS } from "../fakeDB/users";
+
 
 function UsersList() {
   const users = useSelector((state: RootState) => state.users.users); // Получаем список пользователей из Redux

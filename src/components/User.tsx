@@ -11,15 +11,9 @@ function UserItem() {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const editingUserId = useSelector((state) => state.users.editingUserId);
   const users = useSelector((state: RootState) => state.users.users);
   const editedUser = users.find((user: User) => user.id === id);
   const [isEditorOpen, setIsEditorOpen] = useState(false);
-
-  /* useEffect(() => {
-    dispatch(setEditingUserId(id));
-    console.log('setEditingUserId(id)',setEditingUserId(id))
-  }, [dispatch, id]); */
 
   const handleClickBack = () => {
     navigate("/users");
@@ -54,8 +48,7 @@ function UserItem() {
               text="Редактировать рейтинг пользователя"
               onClick={() => {
                 setIsEditorOpen(true);
-                //dispatch(setEditingUserId(id));
-                //console.log('setEditingUserId(id)2+++',setEditingUserId(id))
+                
               }}
             />
           )}

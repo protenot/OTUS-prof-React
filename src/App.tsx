@@ -1,7 +1,7 @@
 //import React from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { Provider } from "react-redux";
-import store from "./redux/store";
+import {store} from "./redux/store";
 import Home from "./components/Home";
 import TaskList from "./components/TaskList";
 import UserItem from "./components/User";

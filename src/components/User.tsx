@@ -6,6 +6,8 @@ import Button from "./Button";
 //import { USERS } from "../fakeDB/users";
 import UserEditor from "./UserEditor";
 import { User } from "../models/user.model";
+import { RootState } from "../redux/store";
+
 
 
 
@@ -14,7 +16,7 @@ function UserItem() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
  // const editingUserId = useSelector((state) => state.users.editingUserId);
-  const users = useSelector((state) => state.users.users);
+  const users = useSelector((state:RootState) => state.users.users);
   const editedUser = users.find((user:User) => user.id === id);
   const [isEditorOpen, setIsEditorOpen] = useState(false);
 

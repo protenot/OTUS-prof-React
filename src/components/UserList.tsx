@@ -5,10 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { removeUser, updateUserRating } from "../redux/userSlice"; // Импортируем действие для обновления рейтинга
 import Button from "./Button";
+import { RootState } from "../redux/store";
 //import { USERS } from "../fakeDB/users";
 
 function UsersList() {
-  const users = useSelector((state) => state.users.users); // Получаем список пользователей из Redux
+  const users = useSelector((state:RootState) => state.users.users); // Получаем список пользователей из Redux
   const dispatch = useDispatch(); // Получаем диспетчер Redux
   const [editingRatingUserId, setEditingRatingUserId] = useState<string | null>(null);
   const [editingRatingValue, setEditingRatingValue] = useState<number>(0);

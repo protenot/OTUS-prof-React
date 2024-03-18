@@ -1,30 +1,29 @@
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import BasicTask from "./BasicTask";
 import Button from "./Button";
-import { TASKS } from "../fakeDB/tasks";
+import { selectTasks, removeTask, updateTag } from "../redux/taskSlice";
 import { Task } from "../models/task.model";
-import { useNavigate } from "react-router-dom";
 
 function TaskList() {
-  const [tasks, setTasks] = useState<Task[]>(TASKS);
+  const tasks = useSelector(selectTasks);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [editingTagTaskId, setEditingTagTaskId] = useState<string | null>(null);
   const [editingTagValue, setEditingTagValue] = useState<string>("");
-
-  const navigate = useNavigate();
 
   const handleChoseButton = (taskId: string) => {
     navigate(`/tasks/${taskId}`);
   };
+
   const handleDeleteButton = (taskId: string) => {
-    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
+    dispatch(removeTask(taskId));
   };
 
   const handleEditingTag = (taskId: string, newTag: string) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) =>
-        task.id === taskId ? { ...task, tag: newTag } : task,
-      ),
-    );
+    dispatch(updateTag({ taskId, tag: newTag }));
     setEditingTagTaskId(null);
     setEditingTagValue("");
   };
@@ -32,7 +31,7 @@ function TaskList() {
   return (
     <div>
       <h2>Список задач</h2>
-      {tasks.map((task) => (
+      {tasks.map((task: Task) => (
         <div key={task.id}>
           <BasicTask
             description={task.description}
